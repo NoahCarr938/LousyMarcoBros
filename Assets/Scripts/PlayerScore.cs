@@ -1,27 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 
 public class PlayerScore : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _coin;
+    public static PlayerScore instance;
 
+    // Displays the text for the current amount of coins
     [SerializeField]
-    private int _coinsToWin;
+    private TextMeshProUGUI _coinText;
 
-    private int _currentcoins = 0;
-    private Rigidbody _rigidBody;
-    private CapsuleCollider _capsuleCollider;
-    private void Start()
+    public int currentCoins = 0;
+
+    private void Awake()
     {
-        // If the amount of coins to win the game is 0 then the game is won
-        if (_coinsToWin == 0)
-            return;
+        instance = this;
     }
 
     private void Update()
     {
-       
+        _coinText.text = currentCoins.ToString();
     }
+
+    public void CollectCoins(int v)
+    {
+        currentCoins += v;
+    }
+   
 }

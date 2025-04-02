@@ -20,9 +20,11 @@ public class GameManager : MonoBehaviour
     public UnityEvent OnGameLoss;
 
     private PlayerMovement _playerMovement;
-    //private CameraFollow _cameraFollow;
     private PlayerTimer _playerTimer;
+    private PlayerScore _playerScore;
+    //private TagSystem _player1TagSystem;
     private Rigidbody _rigidBody;
+    
 
     private bool _gameWon;
     private bool _gameLost;
@@ -33,10 +35,12 @@ public class GameManager : MonoBehaviour
         {
             if (!_player.TryGetComponent(out _playerMovement))
                 Debug.LogError("GameManager: Could not get PlayerMovement");
-            //if (!_player.TryGetComponent(out _cameraFollow))
-            //    Debug.LogError("GameManager: Could not get CameraFollow");
             if (!_player.TryGetComponent(out _playerTimer))
                 Debug.LogError("GameManager: Could not get PlayerTimer");
+            if (!_player.TryGetComponent(out _playerScore))
+                Debug.LogError("GameManager: Could not get PlayerScore");
+            //if (!_player.TryGetComponent(out _player1TagSystem))
+            //    Debug.LogError("GameManager: Could not get Player1TagSystem");
         }
         else
             Debug.LogError("GameManaged: Player not assigned!");
@@ -51,6 +55,9 @@ public class GameManager : MonoBehaviour
         if (!(_playerTimer))
             return;
 
+        if (!(_playerScore))
+            return;
+
         if (_gameWon)
             return;
 
@@ -61,8 +68,10 @@ public class GameManager : MonoBehaviour
         // pseudo code
         // if (_playerScore.winningScore >= 500)
         // Win("You Have Won");
+        if (_playerScore.currentCoins == 10)
+            Win("You Have Won");
 
-        if (_playerTimer.TimeRemaning <= 0)
+            if (_playerTimer.TimeRemaning <= 0)
             Lose("You Have Lost");
     }
 
@@ -85,12 +94,15 @@ public class GameManager : MonoBehaviour
         //  Turns off the components
         if (_playerMovement)
             _playerMovement.enabled = false;
-        //if (_cameraFollow)
-        //    _cameraFollow.enabled = false;
         if (_playerTimer)
             _playerTimer.enabled = false;
+        if (_playerScore)
+            _playerScore.enabled = false;
+        //if (_player1TagSystem)
+        //    _player1TagSystem.enabled = false;
         if (_rigidBody)
             _rigidBody.isKinematic = true;
+        
         // Only calls this function one time instead of every frame
         _gameWon = true;
 
@@ -117,10 +129,12 @@ public class GameManager : MonoBehaviour
         // Turns off the components
         if (_playerMovement)
             _playerMovement.enabled = false;
-        //if (_cameraFollow)
-        //    _cameraFollow.enabled = false;
         if (_playerTimer)
             _playerTimer.enabled = false;
+        if (_playerScore)
+            _playerScore.enabled = false;
+        //if (_player1TagSystem)
+        //    _player1TagSystem.enabled = false;
         if (_rigidBody)
             _rigidBody.isKinematic = true;
         // Only calls this function one time instead of every frame

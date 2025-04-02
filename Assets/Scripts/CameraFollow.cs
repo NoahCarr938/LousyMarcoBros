@@ -19,7 +19,7 @@ public class CameraFollow : MonoBehaviour
     public Transform GetTarget { get { return _target; } }
 
     // Start is called when the instance of the script is loaded
-    private void Start()
+    private void Awake()
     {
         _offset = transform.position - _target.position;
     }

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4180539334125325803}
   - component: {fileID: -3862384372901714887}
   - component: {fileID: 4626282429433875804}
+  - component: {fileID: -867319482279692550}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -181,9 +182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df14db98f1c80a040a067fbd8f4531f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinsPrefab: {fileID: 8560065863044050566, guid: 422fcc11316cc6e409bb08382a99d1d0, type: 3}
-  _coinsToWin: 10
   _coinText: {fileID: 0}
+  currentCoins: 0
 --- !u!114 &4626282429433875804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,3 +198,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startTagged: 1
   _tagImmunityDuration: 1
+--- !u!114 &-867319482279692550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4526897716499916070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f842f882bd602458703f5e874762bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _robotExplosionParticles: {fileID: 1929400278761770175, guid: f64a13e3f3c83d54e83ad4a74a6621e9, type: 3}
+  currentPlayerLives: 1

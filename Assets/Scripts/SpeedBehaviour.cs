@@ -4,29 +4,28 @@ using UnityEngine;
 
 public class SpeedBehaviour : MonoBehaviour
 {
-    //[SerializeField]
-    //private float _speed;
+    [SerializeField]
+    private float _speed;
 
-    //// Movement right
-    //[SerializeField]
-    //private KeyCode _keyRight = KeyCode.D;
-    //// Movement Left
-    //[SerializeField]
-    //private KeyCode _keyLeft = KeyCode.A;
+    // Movement right
+    [SerializeField]
+    private KeyCode _keyRight = KeyCode.D;
+    // Movement Left
+    [SerializeField]
+    private KeyCode _keyLeft = KeyCode.A;
 
-    //private void Update()
-    //{
-    //    // If the speed is greater than or equal to 0 run right
-    //    if (_speed >= 0)
-    //    {
-    //        if (TryGetComponent(out Animator anim))
-    //            anim.SetTrigger("RunTrigger");
-    //    }
-    //    // If the speed is less than or equal to 0 run left
-    //    if (_speed <= 0)
-    //    {
-    //        if (TryGetComponent(out Animator anim))
-    //            anim.SetTrigger("RunTrigger");
-    //    }
-    //}
+    private void Update()
+    {
+        if (Input.GetKeyDown(_keyRight))
+            _speed += 1;
+        if (Input.GetKeyDown(_keyLeft))
+            _speed -= 1;
+        // If speed is greater than or equal to one move right
+        if (_speed >= 1)
+            _speed = Input.GetAxisRaw("PlayerHorizontal");
+
+        // If speed is less than or equal to one move left
+        if (_speed <= 1)
+            _speed = Input.GetAxisRaw("Player1Horizontal");
+    }
 }

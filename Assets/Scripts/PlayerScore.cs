@@ -14,6 +14,7 @@ public class PlayerScore : MonoBehaviour
 
     public int currentCoins = 0;
 
+
     private void Awake()
     {
         instance = this;

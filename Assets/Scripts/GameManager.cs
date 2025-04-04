@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     private PlayerMovement _playerMovement;
     private PlayerTimer _playerTimer;
     private PlayerScore _playerScore;
-    //private TagSystem _player1TagSystem;
+    private PlayerLives _playerLives;
     private Rigidbody _rigidBody;
     
 
@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
                 Debug.LogError("GameManager: Could not get PlayerTimer");
             if (!_player.TryGetComponent(out _playerScore))
                 Debug.LogError("GameManager: Could not get PlayerScore");
+            if (!_player.TryGetComponent(out _playerLives))
+                Debug.LogError("GameManager: Could not get PlayerLives");
             //if (!_player.TryGetComponent(out _player1TagSystem))
             //    Debug.LogError("GameManager: Could not get Player1TagSystem");
         }
@@ -64,14 +66,16 @@ public class GameManager : MonoBehaviour
         if (_gameLost)
             return;
 
+        // If the game object is destroyed, lose the game
+        if (_playerLives.currentPlayerLives <= 0)
+            Lose("You Have Lost");
+
         // Do the win condition here
-        // pseudo code
-        // if (_playerScore.winningScore >= 500)
-        // Win("You Have Won");
-        if (_playerScore.currentCoins == 10)
+        if (_playerScore.currentCoins >= 20)
             Win("You Have Won");
 
-            if (_playerTimer.TimeRemaning <= 0)
+        // Lose condition
+        if (_playerTimer.TimeRemaning <= 0)
             Lose("You Have Lost");
     }
 
@@ -98,6 +102,8 @@ public class GameManager : MonoBehaviour
             _playerTimer.enabled = false;
         if (_playerScore)
             _playerScore.enabled = false;
+        if (_playerLives)
+            _playerLives.enabled = false;
         //if (_player1TagSystem)
         //    _player1TagSystem.enabled = false;
         if (_rigidBody)
@@ -133,6 +139,8 @@ public class GameManager : MonoBehaviour
             _playerTimer.enabled = false;
         if (_playerScore)
             _playerScore.enabled = false;
+        if (_playerLives)
+            _playerLives.enabled = false;
         //if (_player1TagSystem)
         //    _player1TagSystem.enabled = false;
         if (_rigidBody)

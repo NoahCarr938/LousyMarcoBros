@@ -10,33 +10,37 @@ public class RunTrigger : MonoBehaviour
     // Movement Left
     [SerializeField]
     private KeyCode _keyLeft = KeyCode.A;
+
+    //private SpriteRenderer _spriteRenderer;
+    //private float _horizontalInput;
+    //private bool _faceingRight;
+
     private void Update()
     {
+        //_horizontalInput = Input.GetAxisRaw("PlayerHorizontal");
+        //SetDirection();
+
         // Move right animation
         if (Input.GetKeyDown(_keyRight))
         {
+            //_horizontalInput--;
             if (TryGetComponent(out Animator anim))
                 anim.SetTrigger("RunTrigger");
         }
         // Move left animation, currently the same animation as move right
         if (Input.GetKeyDown(_keyLeft))
         {
+            //_horizontalInput++;
             if (TryGetComponent(out Animator anim))
                 anim.SetTrigger("RunTrigger");
         }
-
-        // Stop move right animation
-        if (!Input.GetKeyDown(_keyRight))
-        {
-            if (TryGetComponent(out Animator anim))
-                anim.SetTrigger("IdleTrigger");
-        }
-
-        // Stop move left animation
-        if (!Input.GetKeyDown(_keyLeft))
-        {
-            if (TryGetComponent(out Animator anim))
-                anim.SetTrigger("IdleTrigger");
-        }
     }
+
+    //private void SetDirection()
+    //{
+    //    if (_horizontalInput < 0)
+    //        _spriteRenderer.flipX = true;
+    //    else if (_horizontalInput > 0)
+    //        _spriteRenderer.flipX = false;
+    //}
 }

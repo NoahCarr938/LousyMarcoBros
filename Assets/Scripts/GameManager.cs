@@ -67,16 +67,26 @@ public class GameManager : MonoBehaviour
             return;
 
         // If the game object is destroyed, lose the game
-        if (_playerLives.currentPlayerLives <= 0)
+        //if (_playerLives.currentPlayerLives <= 0)
+        //    Lose("You Have Lost");
+        if (_playerLives.currentPlayerLives <= 0 && _playerScore.currentCoins >= 30)
+            Win("You Have Won!");
+
+        if (_playerLives.currentPlayerLives <= 0 && _playerScore.currentCoins <= 30)
             Lose("You Have Lost");
 
         // Do the win condition here
-        if (_playerScore.currentCoins >= 20)
-            Win("You Have Won");
+        if (_playerTimer.TimeRemaning <= 0 && _playerScore.currentCoins >= 30)
+            Win("You Have Won!");
+
+        //if (_playerScore.currentCoins >= 20)
+        //    Win("You Have Won");
 
         // Lose condition
-        if (_playerTimer.TimeRemaning <= 0)
+        if (_playerTimer.TimeRemaning <= 0 && _playerScore.currentCoins <= 30)
             Lose("You Have Lost");
+        //if (_playerTimer.TimeRemaning <= 0)
+        //    Lose("You Have Lost");
     }
 
     private void Win(string winText)

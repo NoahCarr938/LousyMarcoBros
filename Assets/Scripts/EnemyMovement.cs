@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class EnemyMovement : MonoBehaviour
 {
     [SerializeField]
-    private bool _player = true;
+    private bool _enemy = true;
+
+    [SerializeField]
+    private float _jumpPower = 5.0f;
 
     [SerializeField]
     private float _acceleration = 5.0f;
@@ -14,18 +16,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float _maxSpeed = 10.0f;
 
-    [SerializeField]
-    private float _jumpPower = 5.0f;
-
-    // public variables for ground check
-    public Vector3 objectSize;
-    // Specifies which layer to raycast to
-    public LayerMask layerMask;
-    public float maxDistance;
-
     private Rigidbody _rigidBody;
+
     private float _movementInput;
-    public float GetMaxSpeed{ get { return _maxSpeed; } }
+    public float GetMaxSpeed { get { return _maxSpeed; } }
 
     void Start()
     {
@@ -34,17 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (_player)
-        {
-            // Storing input for the horizontal axis into a movement variable
-            _movementInput = Input.GetAxisRaw("PlayerHorizontal");
-            // If the w key is down and the groundcheck is true, jump
-            if (Input.GetKeyDown(KeyCode.W) && GroundCheck())
-                Jump();
-
-            if (Input.GetKeyDown(KeyCode.S))
-                Fall();
-        }
+        
     }
 
     void FixedUpdate()
@@ -61,6 +45,19 @@ public class PlayerMovement : MonoBehaviour
         Vector3 newVelocity = _rigidBody.velocity;
         newVelocity.x = Mathf.Clamp(newVelocity.x, -_maxSpeed, _maxSpeed);
         _rigidBody.velocity = newVelocity;
+
+        if (_enemy)
+        {
+            // If the w key is down and the groundcheck is true, jump
+            if (Input.GetKeyDown(KeyCode.Space))
+                Jump();
+            //if (Input.GetKeyDown(KeyCode.S))
+            //    Fall();
+            if (_rigidBody.position.y >= 16)
+                Fall();
+            if (_rigidBody.position.y <= 10)
+                Jump();
+        }
     }
 
     void Jump()
@@ -71,20 +68,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Fall()
     {
+        // Impulse only happens once so there is no need for deltaTime
         _rigidBody.AddForce(Vector3.down * _jumpPower, ForceMode.Impulse);
     }
-
-    bool GroundCheck()
-    {
-        // BoxCast casts the box along a ray and returns if it was hit or not
-        if (Physics.BoxCast(transform.position, objectSize, -transform.up, transform.rotation, maxDistance, layerMask))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
 }

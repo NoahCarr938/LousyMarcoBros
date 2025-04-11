@@ -167,6 +167,6 @@ public class GameManager : MonoBehaviour
         // Reload the active scene
         // Build Index tellls the SceneManager what scene it is
         // Add plus 1 to the scenes to move and change scenes
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }

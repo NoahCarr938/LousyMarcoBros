@@ -44,6 +44,9 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.S))
                 Fall();
+
+            if (TryGetComponent(out TrailRenderer renderer))
+                renderer.emitting = true;
         }
     }
 
@@ -62,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
         newVelocity.x = Mathf.Clamp(newVelocity.x, -_maxSpeed, _maxSpeed);
         _rigidBody.velocity = newVelocity;
     }
+
 
     void Jump()
     {

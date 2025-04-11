@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerLives : MonoBehaviour
 {
-    public static PlayerLives instance;
+    //[SerializeField]
+    //private GameObject _explosionParticlesPrefab;
 
-    [SerializeField]
-    private GameObject _robotExplosionParticles;
+    public static PlayerLives instance;
 
     // The number of lives the player has
     public int currentPlayerLives;
@@ -21,14 +21,13 @@ public class PlayerLives : MonoBehaviour
     {
         currentPlayerLives -= v;
         // When a life is lost display robot explosion particles
-        SpawnParticles();
+        //SpawnExploison();
     }
 
-    private void SpawnParticles()
-    {
-        // Guard clause
-        if (_robotExplosionParticles)
-            return;
-        Instantiate(_robotExplosionParticles, gameObject.transform.position, gameObject.transform.rotation);
-    }
+    //private void SpawnExploison()
+    //{
+    //    if (!_explosionParticlesPrefab)
+    //        return;
+    //    Instantiate(_explosionParticlesPrefab, gameObject.transform.position, gameObject.transform.rotation);
+    //}
 }
